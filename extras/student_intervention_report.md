@@ -37,7 +37,7 @@ Produce a table showing training time, prediction time, F<sub>1</sub> score on t
 > **Logistic regression** builds a linear model for classification and can find a linear separator for a dataset with a binary target variable, such as the student data "passed" label.
 
     > <u>Strengths</u>: Fast, simple. Gives insight into the impact of each feature. Less prone to overfitting (higher bias, lower variance). By generating a linear decision boundary, it combats the curse of dimensionality, where the more features a dataset has, the more data is needed to model it.
-    
+
     > <u>Weaknesses</u>: By assuming that a linear decision boundary exists, it may be less accurate than other models and be prone to underfitting.
 
 - Given what you know about the data so far, why did you choose this model to apply?
@@ -59,7 +59,7 @@ Produce a table showing training time, prediction time, F<sub>1</sub> score on t
 > **Support Vector Machines** can find a hyperplane to separate data within a dataset to perform a classification task. The separator is found by using support vectors to maximize the margins around the decision boundary.
 
     > <u>Strengths</u>: Works well with high dimension data and can still be effective where the number of dimensions is greater than the number of samples. Has flexibility to specify the kernel function for the decision function, which enables transforming the data into a higher dimensional space in order to find a separator.
-    
+
     > <u>Weaknesses</u>: Doesn't directly provide a probability estimate for predictions. The kernel function can be prone to overfitting.
 
 - Given what you know about the data so far, why did you choose this model to apply?
@@ -99,19 +99,16 @@ Produce a table showing training time, prediction time, F<sub>1</sub> score on t
 ## 5. Choosing the Best Model
 
 - Based on the experiments you performed earlier, in 1-2 paragraphs explain to the board of supervisors what single model you chose as the best model. Which model is generally the most appropriate based on the available data, limited resources, cost, and performance?
+> &nbsp;&nbsp; A Logistic Regression model was chosen as the best model. It provides the best balance of model simplicity and prediction accuracy, which should limit computer resource needs. During experiments on the data using different models, it had the lowest combo of computation time for both training the computer to model the student data as well as make predictions on test cases (it took .005 sec compared to .017 and .009 for the others). The Logistic Regression model also had the highest score on experimental tests, achieving an F<sub>1</sub> score of 0.7910 vs 0.7586 and 0.7482 for the others (note: [F<sub>1</sub>](https://en.wikipedia.org/wiki/F1_score) measures performance of the model by looking at both the accuracy of each prediction whether a student passes, as well as breadth in identifying all the students who actually passed).
 
-> &nbsp;&nbsp; A Logistic Regression model was chosen as the best model. It provides the best balance of model simplicity and prediction accuracy, which should limit computer resource needs. During experiments on the data using different models, it had the lowest combo of computation time for both training the computer to model the student data as well as make predictions on test cases (it took .005 sec compared to .017 and .009 for the others). The Logistic Regression model also had the highest score on experimental tests, achieving an F<sub>1</sub> score of 0.7910 vs 0.7586 and 0.7482 for the others (note: [F<sub>1</sub>](https://en.wikipedia.org/wiki/F1_score) measures performance of the model by looking at both the accuracy of each prediction whether a student passes, as well as breadth in identifying all the students who actually passed). 
-
-> &nbsp;&nbsp; The simplicity of the model should prevent it from suffering from overfitting, which will allow it to predict well on new students who aren't in the current data. The model can be learned on limited amounts of data, which we have with the student data, and gives a probability of a prediction being correct in addition to the "pass/didn't pass" prediction itself. In addition, the model can provide insight into the specific attributes of the data that contribute greater weight to the prediction, allowing for a focus on students who display similar attributes.
+    > &nbsp;&nbsp; The simplicity of the model should prevent it from suffering from overfitting, which will allow it to predict well on new students who aren't in the current data. The model can be learned on limited amounts of data, which we have with the student data, and gives a probability of a prediction being correct in addition to the "pass/didn't pass" prediction itself. In addition, the model can provide insight into the specific attributes of the data that contribute greater weight to the prediction, allowing for a focus on students who display similar attributes.
 
 - In 1-2 paragraphs explain to the board of supervisors in layman's terms how the final model chosen is supposed to work.
+> &nbsp;&nbsp; Using the student data provided, a model has been built that gives a weight to student attributes found within the data, which are referred to as "features." For example, the data contains features about each student such as their age, their parents' occupation, and the amount of time spent studying. The weights in the constructed model correspond to the importance of each feature in the data when predicting whether a student is likely to pass or not -- the model essentially provides an equation which can be used to calculate the likelihood that a new student will pass, and then a decision can be made on whether an intervention is appropriate.
 
-> &nbsp;&nbsp; Using the student data provided, a model has been built that gives a weight to student attributes found within the data, which are referred to as "features." For example, the data contains features about each student such as their age, their parents' occupation, and the amount of time spent studying. The weights in the constructed model correspond to the importance of each feature in the data when predicting whether a student is likely to pass or not -- the model essentially provides an equation which can be used to calculate the likelihood that a new student will pass, and then a decision can be made on whether an intervention is appropriate. 
-
-> &nbsp;&nbsp; The model simply needs the features of a new student to plug into the equation and return a probability (0-100%) that the student will pass or not. The model will predict a "yes" for students with a probability of greater than 50%, and predict "no" otherwise.
+  > &nbsp;&nbsp; The model simply needs the features of a new student to plug into the equation and return a probability (0-100%) that the student will pass or not. The model will predict a "yes" for students with a probability of greater than 50%, and predict "no" otherwise.
 
 - Fine-tune the model. Use Gridsearch with at least one important parameter tuned and with at least 3 settings. Use the entire training set for this.
-
 > Used Gridsearch to tune the parameters C, class_weight, and max_iter using the following settings:
 
     > ```
@@ -119,17 +116,18 @@ Produce a table showing training time, prediction time, F<sub>1</sub> score on t
                   'class_weight': (None, 'balanced'),
                   'max_iter': (100, 200, 50)}
     ```
-    
+
     > The best estimator was:
- 
+
     > ```
     LogisticRegression(C=0.5, class_weight=None, dual=False, fit_intercept=True,
           intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
           penalty='l2', random_state=0, solver='liblinear', tol=0.0001,
-          verbose=0, warm_start=False) 
-    > ```
+          verbose=0, warm_start=False)
+    ```
 
 - What is the model's final F<sub>1</sub> score?
 > Final F<sub>1</sub> score is 0.8.
+
 
 ---
