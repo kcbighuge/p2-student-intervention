@@ -16,7 +16,7 @@ Your goal is to identify students who might need early intervention - which type
 - Number of students who passed = **265**
 - Number of students who failed = **130**
 - Graduation rate of the class (%) = **67.09**
-- Number of features = **31**
+- Number of features = **30**
 
 
 ## 3. Preparing the Data
@@ -100,15 +100,15 @@ Produce a table showing training time, prediction time, F<sub>1</sub> score on t
 
 - Based on the experiments you performed earlier, in 1-2 paragraphs explain to the board of supervisors what single model you chose as the best model. Which model is generally the most appropriate based on the available data, limited resources, cost, and performance?
 
-> &nbsp;&nbsp; A Logistic Regression model was chosen as the best model. It provides the best balance of model simplicity and prediction accuracy, limiting cost and resource needs.
+> &nbsp;&nbsp; A Logistic Regression model was chosen as the best model. It provides the best balance of model simplicity and prediction accuracy, which should limit computer resource needs. During experiments on the data using different models, it had the lowest combo of computation time for both training the computer to model the student data as well as make predictions on test cases (it took .005 sec compared to .017 and .009 for the others). The Logistic Regression model also had the highest score on experimental tests, achieving an F<sub>1</sub> score of 0.7910 vs 0.7586 and 0.7482 for the others (note: [F<sub>1</sub>](https://en.wikipedia.org/wiki/F1_score) measures performance of the model by looking at both the accuracy of each prediction whether a student passes, as well as breadth in identifying all the students who actually passed). 
 
-> &nbsp;&nbsp; The simplicity of the model should prevent it from suffering from overfitting, which will allow it to predict well on new students who aren't in the current data. The model can be learned on limited amounts of data, which we have with the student data, and gives a probability of a prediction being correct in addition to the prediction itself. In addition, the model can provide insight into the specific features of the data that contribute greater weight to the prediction, allowing for a focus on students who have features that match similarly to the important ones.
+> &nbsp;&nbsp; The simplicity of the model should prevent it from suffering from overfitting, which will allow it to predict well on new students who aren't in the current data. The model can be learned on limited amounts of data, which we have with the student data, and gives a probability of a prediction being correct in addition to the "pass/didn't pass" prediction itself. In addition, the model can provide insight into the specific attributes of the data that contribute greater weight to the prediction, allowing for a focus on students who display similar attributes.
 
 - In 1-2 paragraphs explain to the board of supervisors in layman's terms how the final model chosen is supposed to work.
 
-> &nbsp;&nbsp; Using the student data provided, a model has been built that gives a weight to each of the features in the student data that is supposed to reflect the importance of that feature when predicting whether a student is likely to pass or not. The model essentially provides an equation which can be used to calculate the likelihood that a new student will pass and decide whether an intervention is appropriate. 
+> &nbsp;&nbsp; Using the student data provided, a model has been built that gives a weight to student attributes found within the data, which are referred to as "features." For example, the data contains features about each student such as their age, their parents' occupation, and the amount of time spent studying. The weights in the constructed model correspond to the importance of each feature in the data when predicting whether a student is likely to pass or not -- the model essentially provides an equation which can be used to calculate the likelihood that a new student will pass, and then a decision can be made on whether an intervention is appropriate. 
 
-> &nbsp;&nbsp; The model simply needs the information about the new student to plug into the equation and return a probability that the student will pass or not. The model will predict a "yes" for students with a probability of passing of greater than 50%.
+> &nbsp;&nbsp; The model simply needs the features of a new student to plug into the equation and return a probability (0-100%) that the student will pass or not. The model will predict a "yes" for students with a probability of greater than 50%, and predict "no" otherwise.
 
 - Fine-tune the model. Use Gridsearch with at least one important parameter tuned and with at least 3 settings. Use the entire training set for this.
 
