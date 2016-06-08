@@ -12,6 +12,6 @@ training_indices, testing_indices = train_test_split(tpot_data.index, stratify =
 result1 = tpot_data.copy()
 
 # Perform classification with a random forest classifier
-rfc1 = RandomForestClassifier(n_estimators=198, max_features=min(608, len(result1.columns) - 1))
+rfc1 = RandomForestClassifier(n_estimators=54, max_features=min(125, len(result1.columns) - 1))
 rfc1.fit(result1.loc[training_indices].drop('class', axis=1).values, result1.loc[training_indices, 'class'].values)
 result1['rfc1-classification'] = rfc1.predict(result1.drop('class', axis=1).values)
